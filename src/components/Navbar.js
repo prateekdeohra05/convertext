@@ -8,7 +8,7 @@ export default function Navbar(props) {
     return (
         <nav className="navbar navbar-expand-lg my-0 ">
   <div className="container-fluid">
-     <h3 className={`appName text-${props.mode==='light'?'dark':'light'}`}><span><img className="faviconInTitle" src="apple-touch-icon.png" alt="favicon" /></span>{props.title}</h3>
+     <h3 className={`appName text-${props.mode==='light'?'dark':'light'}`}><span><img className="faviconInTitle" src="apple-touch-icon.png" alt="" /></span>{props.title}</h3>
     <button className="navbar-toggler navbar-light bg-light"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>

@@ -1,8 +1,4 @@
 import React, {useState} from 'react';
-/*import jsPDF from "jspdf";
-import html2pdf from "html2pdf.js";
-import html2canvas from "html2canvas";*/
-
 
 export default function TextForm(props) {
   
@@ -15,7 +11,7 @@ const handleDownloadTxtClick = ()=>{
     const file = new Blob([document.getElementById('myBox').value], {type: 'text/plain'});
     element.href = URL.createObjectURL(file);
     element.download = "myFile.txt";
-    document.body.appendChild(element); // Required for this to work in FireFox
+    document.body.appendChild(element); 
     element.click();
     props.showAlert('.txt file is downloading....');
 }
@@ -53,7 +49,7 @@ const handleUpClick = ()=>{
     setText(newText);
     props.showAlert('Each sentence is capitalised.');
   }
-  var numberOfWords;
+  var numberOfWords=0;
   var numberOfChars;
   var timeToRead;
   if(text===''){
@@ -62,25 +58,23 @@ const handleUpClick = ()=>{
     timeToRead=0;
   }
   else{
-    let newText = text.trim();
-    if(newText===''){
+     
+    if(text===''){
       numberOfWords = 0;
       numberOfChars = 0;
       timeToRead=0;}
       else{
-        numberOfWords = newText.split(' ').length;
-        numberOfChars = newText.length;}
-        timeToRead = 0.08*newText.split(' ').length;
+        var wordArray = text.split(/\s+/);
+        for(let i=0;i<text.split(/\s+/).length;i++){
+          if(wordArray[i]!==''){
+            numberOfWords++;
+          }
+        }
+        numberOfChars = text.length;}
+        timeToRead = 0.08*numberOfWords;
       }
-     const handleCopyClick = ()=>{
-      var copyText = document.getElementById("myBox");
-
-  /* Select the text field */
-  copyText.select();
-  copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-   /* Copy the text inside the text field */
-  navigator.clipboard.writeText(copyText.value);
+     const handleCopyClick = ()=>{ 
+  navigator.clipboard.writeText(text);
   props.showAlert('Text is copied to Clipboard.');
      }
  const handleRemoveExtraSpacesClick = ()=>{
@@ -104,7 +98,7 @@ const handleUpClick = ()=>{
        var sel = textarea.value.substring(start, end); 
        let replace = sel.toUpperCase();
      
-      // Here we are replacing the selected text with this one
+    
      setText(textarea.value.substring(0,start) + replace + textarea.value.substring(end,len));
      props.showAlert('SELECTED TEXT IS CONVERTED TO UPPERCASE.');
      }
@@ -117,7 +111,7 @@ const handleUpClick = ()=>{
       var sel = textarea.value.substring(start, end); 
        let replace = sel.toLowerCase();
      
-      // Here we are replacing the selected text with this one
+   
      setText(textarea.value.substring(0,start) + replace + textarea.value.substring(end,len));
      props.showAlert('selected text is converted to lowercase.')
      }
@@ -157,35 +151,35 @@ const handleUpClick = ()=>{
     return (
         <>
         <div className="bodyContainer" >
-        <div className="textFormContainer mx-5" >
-            <h3 className={` text-${props.mode==='light'?'dark':'light'} `}>{props.heading}</h3>
-    <div className="mb-3" >
+        <div className="textFormContainer mx-5">
+            <h6 className={` text-${props.mode==='light'?'dark':'light'}`}>{props.heading}</h6>
+    <div className="mb-3">
   <textarea  className={`form-control text-${props.mode==='light'?'dark':'light'}`}  value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
     </div>
     </div>
-    <div className="mx-5">
+    <div >
     <div className="btnContainer" >
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleUpClick}>CONVERT TO UPPERCASE</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleLowClick}>convert to lowercase</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleClearClick}>Clear Text</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleCapitaliseWordClick}>Capitalise Each Word</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleCapitaliseSentenceClick}>Capitalise each sentence</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleDownloadTxtClick}>Download Text</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleCopyClick}>Copy Text</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleRemoveExtraSpacesClick}>Remove Extra        Spaces</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleSelectedUpClick}>SELECTED TEXT TO UPPERCASE</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleSelectedLowClick}>selected text to lowercase</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleSelectedCapitaliseEachWordClick}>Capitalise Each Word In Selected Text</button>
-      <button className={`btn btn-primary action-btn  text-${props.mode==='light'?'dark':'light'}`} onClick={handleSelectedCapitaliseEachSentenceClick}>Capitalise each sentence in selected text</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleUpClick}>CONVERT TO UPPERCASE</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleLowClick}>convert to lowercase</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleClearClick}>Clear Text</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleCapitaliseWordClick}>Capitalise Each Word</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleCapitaliseSentenceClick}>Capitalise each sentence</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleDownloadTxtClick}>Download Text</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleCopyClick}>Copy Text</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleRemoveExtraSpacesClick}>Remove Extra        Spaces</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleSelectedUpClick}>SELECTED TEXT TO UPPERCASE</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleSelectedLowClick}>selected text to lowercase</button>
+      <button disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleSelectedCapitaliseEachWordClick}>Capitalise Each Word In Selected Text</button>
+      <button  disabled={ text.length===0} className={`btn rounded btn-primary action-btn mx-2 my-1 text-${props.mode==='light'?'dark':'light'}`} onClick={handleSelectedCapitaliseEachSentenceClick}>Capitalise each sentence in selected text</button>
 </div>
 </div>
 </div>
-<div className={`textFormContainer container my-3 text-${props.mode==='light'?'dark':'light'}`} >
+<div className={`mx-3  textFormContainer container my-3 text-${props.mode==='light'?'dark':'light'}`} >
     <h3 className="underlinedHeading" >Text Summary</h3>
-    <h6 > Number of Words: {numberOfWords} &nbsp;&nbsp;&nbsp;&nbsp; Number of Characters:{numberOfChars}</h6>
-    <h6 > Approx. time to read (in minutes): {timeToRead}</h6>
+    <h6 className="textSummary"><span> {numberOfWords} words &nbsp;&nbsp;</span>|<span>&nbsp;&nbsp;{numberOfChars} characters&nbsp; &nbsp;</span>|<span>&nbsp;&nbsp;{timeToRead} minutes to read </span></h6>
+    
     <h3 className="underlinedHeading">Preview</h3>
-    <p id='previewText'>{text.length>0?text:'Enter Your Text to Preview Here'}</p>
+    <p id='previewText'>{text.length>0?text:'Nothing to Preview!!'}</p>
 </div>
 </>
     )
