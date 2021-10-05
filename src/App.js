@@ -123,12 +123,12 @@ function App() {
   return (
    <>
   
-   <Navbar title='Correctext' mode={mode} homePage={homePage} aboutPage={aboutPage} back_black={back_black} back_blue={back_blue} back_red={back_red} back_green={back_green} back_yellow={back_yellow} back_white={back_white}  />
+   <Navbar title='Recorrectext' mode={mode} homePage={homePage} aboutPage={aboutPage} back_black={back_black} back_blue={back_blue} back_red={back_red} back_green={back_green} back_yellow={back_yellow} back_white={back_white}  />
    <div className="container my-3">
      <Alert alert={alert}  />
    </div>
     
-   <TextForm showAlert={showAlert} mode={mode} heading= 'Correctext- Word Counter | Character Counter | Case Converter | UpperCase to LowerCase | LowerCase to UpperCase | Capitalise Words | Capitalise Sentences | Remove Extra Spaces | Download Text File'/>
+   <TextForm showAlert={showAlert} mode={mode} heading= 'Recorrectext- Word Counter | Character Counter | Case Converter | UpperCase to LowerCase | LowerCase to UpperCase | Capitalise Words | Capitalise Sentences | Remove Extra Spaces | Download Text File'/>
 
       <div >
       <AboutPage mode={mode} theme={theme}/>

@@ -10,7 +10,7 @@ export default function AboutPage(props) {
         <>
         <div className={`aboutPageContainer text-${props.mode==='light'?'dark':'light'}`}>
           <ul style={{listStyleType:'square', fontSize:'20px',fontFamily:'cursive'}}>
-    <li> <p className="mx-2"> <span style={{fontSize:'40px'}}>Correctext</span> is a TextUtility which tells you about number of Words and Characters in your Text. Additionally, it also tells about approximate time to read the Text.</p></li>
+    <li> <p className="mx-2"> <span style={{fontSize:'40px'}}>Recorrectext</span> is a TextUtility which tells you about number of Words and Characters in your Text. Additionally, it also tells about approximate time to read the Text.</p></li>
     <li><p className="mx-2">Here you can also change Case of your Text like UpperCase to LowerCase and LowerCase to UpperCase.</p></li>
     <li><p className="mx-2">You can also Capitalise Words and Sentences in your Text.</p></li>
      </ul>
